@@ -1,5 +1,6 @@
 # Custom python functions
 
+
 def double_number(a):
     """
      Doubles the value of the input number and prints the value before and after doubling.
@@ -15,7 +16,10 @@ def double_number(a):
     value before double_number(): 4
     value after double_number(): 8
     """
-    return a+a
+    print(f"value before double_number(): {a}")
+    result = a + a
+    print(f"value after double_number(): {result}")
+    return 0
 
 def square_number(a):
     """
@@ -32,4 +36,7 @@ def square_number(a):
     value before square_number(): 4
     value after square_number(): 16
     """
-    return a*a
+    print(f"value before square_number(): {a}")
+    result = a * a
+    print(f"value after square_number(): {result}")
+    return 0
