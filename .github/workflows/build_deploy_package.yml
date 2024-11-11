@@ -1,0 +1,33 @@
+name: Package
+
+on:
+  push:
+    branches:
+      - new_branch
+
+
+jobs:
+  with-checkout-job:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install tree CLI tool
+      run: sudo apt-get install tree
+
+    - name: Display directory tree before build
+      run: tree
+
+    - name: Build the Python package
+      run: |
+        pip install --upgrade build
+        python -m build
+
+    - name: Display directory tree after build
+      run: tree
