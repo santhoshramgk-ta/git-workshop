@@ -1,0 +1,69 @@
+name: Build Package
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - sathish_package
+
+
+jobs:
+  # Build Job
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install tree CLI tool
+      run: sudo apt-get install tree
+
+    - name: Display directory tree before build
+      run: tree
+
+    - name: Build the Python package
+      run: |
+        python -m build
+
+    - name: Display directory tree after build
+      run: tree
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-build
+        path: dist/*
+
+        name: python-script-file
+        path: script.py
+
+  # Deploy Job
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-build
+          path: ./artifact
+
+      - name: Install the Python package
+        run: |
+          ls -R
+          cd artifact
+          pip install *.whl
+
+      - name: Run script.py
+        run: python script.py
