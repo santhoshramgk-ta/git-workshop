@@ -80,4 +80,4 @@ jobs:
           pip install *.whl
 
       - name: Run script.py
-        run: python script.py
+        run: python artifact/script.py
