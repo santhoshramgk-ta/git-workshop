@@ -40,8 +40,11 @@ jobs:
       with:
         name: python-package-build
         path: dist/*
-
-        name: python-script-file
+    
+    - name: Upload script file
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-build
         path: script.py
 
   # Deploy Job
