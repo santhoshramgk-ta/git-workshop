@@ -1,4 +1,4 @@
-from simple_functions import double_number, square_number
+from sathish_package.simple_functions import double_number, square_number
 
 a = 5
 double_number(a)
