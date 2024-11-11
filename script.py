@@ -1,4 +1,4 @@
-from src.my_pkg.simple_functions import double_number, square_number
+from my_pkg.simple_functions import double_number, square_number
 
 a = 5
 double_number(a)
