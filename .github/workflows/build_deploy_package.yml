@@ -31,3 +31,40 @@ jobs:
 
     - name: Display directory tree after build
       run: tree
+
+    - name: Artifact Creation
+      run: |
+        rm dist/*.tar.gz
+        mv script.py dist/script.py
+        tree .
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: my_artifact
+        path: dist/*
+
+  deploy:
+   name: Deploy Job
+   needs: with-checkout-job
+   runs-on: ubuntu-latest
+
+   steps:
+
+    - name: Download build artifacts
+      uses:  actions/download-artifact@v4
+      with:
+        name: my_artifact
+        path: ./artifact
+
+    - name: Install the Python package
+      run: |
+        pip install ./artifact/*.whl
+
+    - name: Tree in Deploy
+      run: |
+        sudo apt-get install -y tree
+        tree .
+
+    - name: Running code
+      run: python artifact/script.py
