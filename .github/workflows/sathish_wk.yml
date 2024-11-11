@@ -82,4 +82,4 @@ jobs:
           pip install *.whl
 
       - name: Run script.py
-        run: python dist/script.py
+        run: python script.py
