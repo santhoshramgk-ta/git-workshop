@@ -35,15 +35,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install setuptools wheel build
 
-    - name: Move script file to dist
-      run: mv script.py dist/
-
     - name: Display directory tree before build
       run: tree
 
     - name: Build the Python package
       run: |
         python -m build
+
+    - name: Move script file to dist
+      run: mv script.py dist/
 
     - name: Display directory tree after build
       run: tree
